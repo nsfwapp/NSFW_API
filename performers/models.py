@@ -42,6 +42,9 @@ class Scene(models.Model):
     rating = models.ForeignKey('Ratings', models.DO_NOTHING, blank=True, null=True)
     movie = models.ForeignKey('Movie', models.DO_NOTHING, blank=True, null=True)
 
+    performers = models.ManyToManyField(Performer)
+    tags = models.ManyToManyField(Tags)
+
     class Meta:
         db_table = 'scenes'
 
@@ -57,6 +60,10 @@ class Movie(models.Model):
     director = models.ForeignKey('Directors', models.DO_NOTHING, blank=True, null=True)
     release_date = models.ForeignKey('Releasedates', models.DO_NOTHING, blank=True, null=True)
     rating = models.ForeignKey('Ratings', models.DO_NOTHING, blank=True, null=True)
+
+    performers = models.ManyToManyField(Performer)
+    tags = models.ManyToManyField(Tags)
+    genres = models.ManyToManyField(Genres)
 
     class Meta:
         db_table = 'movies'
