@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 
@@ -27,7 +28,7 @@ class Releasedates(models.Model):
         db_table = 'releasedates'
 
 class Tags(models.Model):
-    tag = models.CharField(unique=True, max_length=100, blank=True, null=True)
+    tag_name = models.CharField(unique=True, max_length=100, blank=True, null=True)
 
     class Meta:
         db_table = 'tags'
@@ -51,7 +52,7 @@ class Performer(models.Model):
     aliases = models.TextField(blank=True, null=True)
     gender = models.TextField(blank=True, null=True)  # This field type is a guess.
     description = models.TextField(blank=True, null=True)
-    profile_pic = models.URLField(blank=True, null=True)  
+    profile_pic = models.URLField(models.CharField(null=True), null=True)  
     date_of_birth = models.DateField(blank=True, null=True)
     years_active = models.CharField(max_length=50, blank=True, null=True)
     ethnicity = models.CharField(max_length=50, blank=True, null=True)
@@ -111,5 +112,18 @@ class Scene(models.Model):
         db_table = 'scenes'
 
 
+class FavoriteScene(models.Model):
+    user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
 
+    scene = models.ForeignKey(Scene, related_name='favorite_scenes', on_delete=models.CASCADE)
+
+class FavoriteMovie(models.Model):
+    user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
+
+    movie = models.ForeignKey(Movie, related_name='favorite_movies', on_delete=models.CASCADE)
+
+class FavoritePerformer(models.Model):
+    user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
+
+    performer = models.ForeignKey(Performer, related_name='favorite_performers', on_delete=models.CASCADE)
 
