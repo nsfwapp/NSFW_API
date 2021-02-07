@@ -1,0 +1,10 @@
+.register{
+    width: 100%;
+}
+
+
+.form{
+    width:100%;
+    display: flex;
+    margin: 5px;
+}
