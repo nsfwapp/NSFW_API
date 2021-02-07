@@ -11,5 +11,8 @@ GraphQL Api for NSFW_Scraper
      - [ ] save to playlist
      - [ ] download 
      - [ ] filters
+- Client
+  - [ ] create good ui for login/register and tour home page ( functionality already implemented )
+  - [ ] create performer, scene, movie and studio cards
 
 # Join Discord: [NSFW_DEV](https://discord.gg/7GgzeRAZ7P)
