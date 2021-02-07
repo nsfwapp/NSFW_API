@@ -10,6 +10,7 @@ graphene-django = "*"
 django-graphql-jwt = "*"
 python-dotenv = "*"
 psycopg2 = "*"
+pyjwt = "==1.7.0"
 
 [dev-packages]
 
