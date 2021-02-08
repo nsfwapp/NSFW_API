@@ -7,17 +7,16 @@ import NavTour from '../layout/NavTour'
 
 function Tour() {
 
-
   return (
     <Router>
-      <>
+      
       <NavTour />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
       </Switch>
-      </>
+      
     </Router>
   )
   // newUser ?(

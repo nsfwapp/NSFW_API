@@ -1,9 +1,8 @@
 import React, { useState, useEffect} from 'react'
 import { Mutation } from "react-apollo";
 import { gql } from "apollo-boost";
-import './register.css'
 
-
+import makeStyles from "@material-ui/core/styles/makeStyles"
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
@@ -21,12 +20,55 @@ import Slide from "@material-ui/core/Slide";
 import Gavel from "@material-ui/icons/Gavel";
 import VerifiedUserTwoTone from "@material-ui/icons/VerifiedUserTwoTone";
 
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        width: "auto",
+        display: "block",
+        marginLeft: theme.spacing.unit * 3,
+        marginRight: theme.spacing.unit * 3,
+        [theme.breakpoints.up("md")]: {
+            width: 400,
+            marginLeft: "auto",
+            marginRight: "auto"
+          }
+    },
+    paper: {
+        backgroundColor: '#000E2B',
+        marginTop: theme.spacing.unit * 8,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        padding: theme.spacing.unit * 2    
+    },
+    form: {
+        width: '100%',
+        marginTop: theme.spacing.unit
+    },
+    avatar: {
+        margin: theme.spacing.unit,
+        backgroundColor: theme.palette.primary.light
+    },
+    title: {
+        marginTop: theme.spacing.unit * 2,
+        color: theme.palette.secondary.main
+      },
+    submit: {
+        marginTop: theme.spacing.unit * 2,
+        marginBottom: theme.spacing.unit * 2
+    }
+  }));
+
+
+
 function Transition(props) {
     return <Slide direction="up" {...props} />
 }
 
 
 export default function Register() {
+
+    const classes = useStyles();
 
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
@@ -40,15 +82,15 @@ export default function Register() {
 
 
     return (
-        <div className='register'>
+        <div className={classes.root}>
 
-            <Paper className='paper'>
+            <Paper className={classes.paper}>
                 
-                <Avatar className='avatar'>
+                <Avatar className={classes.avatar}>
                     <Gavel />
                 </Avatar>
                 
-                <Typography variant='h4'>
+                <Typography className={classes.title} variant='h4'>
                     Register
                 </Typography>
 
@@ -63,18 +105,18 @@ export default function Register() {
                     {(createUser, {loading, error}) => {
 
                         return ( 
-                            <form className='form' onSubmit={Event => handleSubmit(Event, createUser)}>
-                                <FormControl margin='normal' required >
+                            <form className={classes.form} onSubmit={Event => handleSubmit(Event, createUser)}>
+                                <FormControl margin='normal' required fullWidth>
                                     <InputLabel htmlFor='username'>Username</InputLabel>
                                     <Input id='username' onChange={Event => setUsername(Event.target.value)} />
                                 </FormControl>
 
-                                <FormControl margin='normal' required >
+                                <FormControl margin='normal' required fullWidth>
                                     <InputLabel htmlFor='email'>Email</InputLabel>
                                     <Input id='email' type='email' onChange={Event => setEmail(Event.target.value)} />
                                 </FormControl>
 
-                                <FormControl margin='normal' required >
+                                <FormControl margin='normal' required fullWidth>
                                     <InputLabel htmlFor='password'>Password</InputLabel>
                                     <Input id='password' type='password' onChange={Event => setPassword(Event.target.value)} />
                                 </FormControl>
@@ -82,14 +124,20 @@ export default function Register() {
                                 <Button
                                     type='submit'
                                     variant='contained'
+                                    fullWidth
+                                    color = "secondary"
+                                    className={classes.submit}
                                     disabled={loading || !username.trim() || !email.trim() || !passwd.trim()}
                                 >
                                 {loading ? "Registering..." : "Register"}   
                                 </Button>
 
                                 <Button
-                                    type='submit'
-                                    variant='contained'
+                                    href='/login'
+                                    variant='outlined'
+                                    fullWidth
+                                    color = "secondary"
+                                    className={classes.submit}
                                     
                                 >Login
                                 </Button>
