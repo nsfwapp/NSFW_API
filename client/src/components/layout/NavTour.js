@@ -1,25 +1,71 @@
-    import React from 'react'
-    import { AppBar, Toolbar } from '@material-ui/core'
-    import {Link} from 'react-router-dom'
+import React from "react";
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Typography,
+  makeStyles,
+  Grid,
+} from "@material-ui/core";
+import { Link } from "react-router-dom";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: '#010102',
+  },
+  buttontext: {
+      '&:hover':{
+          //backgroundColor: '#fff'
+          color: '#fff',
+
+      }
+  },
+  logo: {
+    marginLeft: theme.spacing.unit * 8,
     
-    export default function Nav() {
-        return (
-            <AppBar position='static'>
-                <Toolbar>
-                    <Link to="/" >
-                        Home
-                    </Link>
+  },
+  logotext: {
+    fontSize: 20,
+    fontWeight: '800',
+    letterSpacing: 3,
+  },
+  lr: {
+    marginRight: theme.spacing.unit * 8
+  }
+}));
 
-                    <Link to="/login" >
-                        Login
-                    </Link>
+export default function Nav() {
+  const classes = useStyles();
 
-                    <Link to="/register" >
-                        Register
-                    </Link>
+  return (
+    <div >
+      <Grid container alignItems="center">
+      <AppBar position="static" className={classes.root}>
+        <Toolbar variant="dense">
+            <Grid item>
+              <Button
+                href="/"
+                variant="inherit"
+                color="secondary"
+                className={classes.logo}
+                size="large"
+              >
+                <Typography className={classes.logotext} color="secondary">NSFW</Typography>
+              </Button>
+            </Grid>
+            <Grid item sm />
+            <Grid item className={classes.lr}>
+              <Button href="/register" variant="inherit" color="secondary">
+                <Typography className={classes.buttontext} color="secondary">Register</Typography>
+              </Button>
 
-                </Toolbar>
-            </AppBar>
-        )
-    }
-    
+              <Button href="/login" variant="inherit" color="secondary">
+                <Typography className={classes.buttontext} color="secondary">Login</Typography>
+              </Button>
+            </Grid>    
+          </Toolbar>
+      </AppBar>
+      </Grid>
+    </div>
+  );
+}
