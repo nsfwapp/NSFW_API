@@ -21,16 +21,21 @@ const useStyles = makeStyles((theme) => ({
       }
   },
   logo: {
-    marginLeft: theme.spacing.unit * 8,
+//    marginLeft: theme.spacing.unit * 8,
+    [theme.breakpoints.up('md')]: {
+      marginLeft: theme.spacing.unit * 8,
+    },
     
   },
   logotext: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: '800',
     letterSpacing: 3,
   },
   lr: {
-    marginRight: theme.spacing.unit * 8
+    [theme.breakpoints.up('md')]: {
+      marginRight: theme.spacing.unit * 8,
+    },
   }
 }));
 
@@ -41,7 +46,7 @@ export default function Nav() {
     <div >
       <Grid container alignItems="center">
       <AppBar position="static" className={classes.root}>
-        <Toolbar variant="dense">
+        <Toolbar variant="regular">
             <Grid item>
               <Button
                 href="/"
@@ -55,6 +60,10 @@ export default function Nav() {
             </Grid>
             <Grid item sm />
             <Grid item className={classes.lr}>
+            <Button href="/tour" variant="inherit" color="secondary">
+                <Typography className={classes.buttontext} color="secondary">Tour</Typography>
+              </Button>
+
               <Button href="/register" variant="inherit" color="secondary">
                 <Typography className={classes.buttontext} color="secondary">Register</Typography>
               </Button>

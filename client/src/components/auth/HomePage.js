@@ -16,13 +16,22 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    width:'100%',
     minHeight: '100vh',
     // backgroundImage: `url(https://i.imgur.com/0N0eiUE.png)`,
     backgroundImage: `url("https://ctf-images.gammacdn.com/cdyxtpbavd4i/yKVZGyPnfp9RyKcUZkrap/9d55adcccc0ec20c9887ea66147fa163/AT-Freetour_MOSAIC2020.jpg?fm=webp")`,
     backgroundSize:"cover",
     backgroundRepeat: "no-repeat",
+    position: "relative",
     // maskImage: `url(https://static01-cms-fame.gammacdn.com/puretaboo/m/6aw1dabkwkkk0koo/raster.png)`
+    
+  },
+  shadow: {
+    minHeight: '100vh',
+    backgroundImage: `url(https://static01-cms-fame.gammacdn.com/puretaboo/m/6aw1dabkwkkk0koo/raster.png)`,
+    backgroundSize:"cover",
+    backgroundRepeat: "no-repeat",
+    position: "absolute",
+
     
   },
   title: {
@@ -38,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
   expand: {
     color: "#fff",
-    marginTop: theme.spacing.unit * 15,
+
     fontSize: 48,
   }
 
@@ -53,6 +62,8 @@ export default function HomePage() {
   return (
     <div>
     <div className={classes.root}>
+    
+
       <container maxWidth="sm">
       <Paper className={classes.paper}>
       <Grid container alignContent="center">
@@ -67,7 +78,9 @@ export default function HomePage() {
 
         
       </Grid>
+      <div style={{height:'150px'}}></div>
       <Grid container alignItems="center" direction="column">
+
         <Grid item>
       <IconButton >
           <ExpandMoreIcon className={classes.expand} />
@@ -77,10 +90,10 @@ export default function HomePage() {
       </Paper>
       
       </container>
-    </div>
-    <div>
-
-    </div>
+      </div>
+      <div className={classes.shadow}></div>
+      
+    
     </div>
   )
 }

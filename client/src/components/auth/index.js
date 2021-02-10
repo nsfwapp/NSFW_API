@@ -5,6 +5,8 @@ import HomePage from './HomePage'
 import Login from './Login'
 import NavTour from '../layout/NavTour'
 
+import TourPage from './TourPage';
+
 function Tour() {
 
   return (
@@ -13,6 +15,7 @@ function Tour() {
       <NavTour />
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route path='/tour' component={TourPage} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
       </Switch>

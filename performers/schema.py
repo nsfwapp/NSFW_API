@@ -41,7 +41,7 @@ class FavoritePerformerType(DjangoObjectType):
 
 #Query for each one
 class Query(graphene.ObjectType):
-    performers = graphene.List(PerformerType, search=graphene.String())
+    performers = graphene.List(PerformerType, search=graphene.String(), id=graphene.Int())
     scenes = graphene.List(SceneType)
     movies = graphene.List(MovieType)
     studios = graphene.List(StudioType)
@@ -50,9 +50,11 @@ class Query(graphene.ObjectType):
     favorite_movies = graphene.List(FavoriteMovieType)
     favorite_performers = graphene.List(FavoritePerformerType)
 
-    def resolve_performers(self, info, search=None):
+    def resolve_performers(self, info, search=None, id=None):
         if search:
             return Performer.objects.filter(name__icontains=search)
+        elif id:
+            return Performer.objects.filter(id=id)
 
         return Performer.objects.all()
 
