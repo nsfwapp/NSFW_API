@@ -11,30 +11,40 @@ import CardMedia from "@material-ui/core/CardMedia";
 const useStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: "#010102",
-    display: 'flex'
-    
+    //display: 'flex'
   },
   root: {
-    maxWidth: 460,
-    marginLeft: '7%',
-    marginRight: '7%',
-    marginTop: '10%'
+    // maxWidth: 420,
     
 
     // color: theme.palette.secondary.main,
   },
   media: {
     height: 640,
-    
   },
   container: {
     //marginLeft: "4%",
     //marginRight: "4%",
   },
-  title:{
-    marginLeft: '5%',
-    marginRight: '5%',
-    marginTop: '7.5%'
+  title: {
+
+  },
+  right: {
+    marginRight: "2%",
+    marginTop: "5%",
+    
+  
+    
+  },
+  left: {
+    //flexDirection:'column',
+    maxWidth: 420,
+    marginLeft: "6.5%",
+    marginTop: "5.5%",
+    
+  },
+  info:{
+    margin:'2%'
   }
 }));
 
@@ -51,13 +61,12 @@ export default function PerformerPage({ match }) {
           if (loading) return <Loading />;
           if (error) return <Error />;
 
-          const performer = data.performers[0]
+          const performer = data.performers[0];
 
           return (
             <div className="container">
-              
-              <Grid container sm={12}>
-                <Grid item sm={6}>
+              <Grid container >
+                <Grid item className={classes.left} xs={12} md={6} lg={6}>
                   <Card className={classes.root}>
                     <CardMedia
                       className={classes.media}
@@ -66,21 +75,189 @@ export default function PerformerPage({ match }) {
                     />
                   </Card>
                 </Grid>
+                {/* <Grid item sm /> */}
+                <Grid item xs={12} md>
+                  <Grid container className={classes.right}>
+                    <Grid item xs={12} className={classes.info}>
+                      <Typography
+                        
+                        align="center"
+                        variant="h3"
+                        color="secondary"
+                        noWrap
+                      >
+                        {performer.name}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} className={classes.info}>
+                    <Typography
+                        
+                        align="center"
+                        variant="h5"
+                        color="inherit"
+                        
+                        
+                      >
+                        Aliases: {performer.aliases}
+                      </Typography>
+                      </Grid>
+                    {/* </Grid>
+                    <Typography
+                        
+                        align="center"
+                        variant="body2"
+                        color="inherit"
+                        
+                        
+                      >
+                        Description: {performer.description}
+                      </Typography>
+                    </Grid> */}
+                    <Grid item xs={12} md={5} className={classes.info} >
+                    <Typography
+                        
+                        align="center"
+                        variant="h6"
+                        color="inherit"
+                        noWrap
+                        
+                      >
+                        Date Of Birth: {performer.dateOfBirth}
+                      </Typography>
+                      
+                    </Grid>
 
-                <Grid item sm={6}>
-                    <Grid container flexDirection='column'>
-                        <Grid item className={classes.title}>
-                <Typography  align="center" variant="h2" color='secondary' noWrap>
-                      {performer.name}
-                    </Typography>
-                    <Grid item>
-                        tabes edit/info/scenes/movies 
+                    <Grid item xs={12} md={5} className={classes.info}>
+                    <Typography
+                        
+                        align="center"
+                        variant="h6"
+                        color="inherit"
+                        noWrap
+                        
+                      >
+                        ethnicity: {performer.ethnicity}
+                      </Typography>
+                      
                     </Grid>
+
+                    <Grid item xs={12} md={5} className={classes.info}>
+                    <Typography
+                        
+                        align="center"
+                        variant="h6"
+                        color="inherit"
+                        noWrap
+                        
+                      >
+                        Height: {performer.height}
+                      </Typography>
+                      
                     </Grid>
+
+                    <Grid item xs={12} md={5} className={classes.info}>
+                    <Typography
+                        
+                        align="center"
+                        variant="h6"
+                        color="inherit"
+                        noWrap
+                        
+                      >
+                        Hair Color: {performer.hairColor}
+                      </Typography>
+                      
                     </Grid>
+
+                    <Grid item xs={12} md={5} className={classes.info}>
+                    <Typography
+                        
+                        align="center"
+                        variant="h6"
+                        color="inherit"
+                        
+                        
+                      >
+                        Tattoos: {performer.tattoos}
+                      </Typography>
+                      </Grid>
+
+
+                      <Grid item xs={12} md={5} className={classes.info} >
+                    <Typography
+                        
+                        align="center"
+                        variant="h6"
+                        color="inherit"
+                        noWrap
+                        
+                      >
+                        Brests: {performer.boobs}
+                      </Typography>
+                      
+                    </Grid>
+
+                    <Grid item xs={12} md={5} className={classes.info}>
+                    <Typography
+                        
+                        align="center"
+                        variant="h6"
+                        color="inherit"
+                        noWrap
+                        
+                      >
+                        Birth Place: {performer.birthPlace}
+                      </Typography>
+                      
+                    </Grid>
+
+                    <Grid item xs={12} md={5} className={classes.info}>
+                    <Typography
+                        
+                        align="center"
+                        variant="h6"
+                        color="inherit"
+                        
+                        
+                      >
+                        Piercings: {performer.piercings}
+                      </Typography>
+                      
+                    </Grid>
+
+                    <Grid item xs={12} md={5} className={classes.info}>
+                    <Typography
+                        
+                        align="center"
+                        variant="h6"
+                        color="inherit"
+                        noWrap
+                        
+                      >
+                        Measurments: {performer.measurments}
+                      </Typography>
+                      
+                    </Grid>
+
+                    <Grid item xs={12} md={5} className={classes.info}>
+                    <Typography
+                        
+                        align="center"
+                        variant="h6"
+                        color="inherit"
+                        noWrap
+                        
+                      >
+                        years Active: {performer.yearsActive}
+                      </Typography>
+                      
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Grid>
-            </div>
+              </div>
+              
+            
           );
         }}
       </Query>

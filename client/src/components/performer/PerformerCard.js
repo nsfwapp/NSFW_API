@@ -55,7 +55,6 @@ export default function PerformerCard({ performers }) {
         {performers.map((performer) => (
           <Grid
             item
-            rows={12}
             spacing={1}
             xs={6}
             md={4}
