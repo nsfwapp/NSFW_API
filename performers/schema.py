@@ -42,9 +42,9 @@ class FavoritePerformerType(DjangoObjectType):
 #Query for each one
 class Query(graphene.ObjectType):
     performers = graphene.List(PerformerType, search=graphene.String(), id=graphene.Int())
-    scenes = graphene.List(SceneType)
-    movies = graphene.List(MovieType)
-    studios = graphene.List(StudioType)
+    scenes = graphene.List(SceneType, id=graphene.Int(), search=graphene.String())
+    movies = graphene.List(MovieType, id=graphene.Int(), search=graphene.String())
+    studios = graphene.List(StudioType, id=graphene.Int(), search=graphene.String())
     tags = graphene.List(TagsType)
     favorite_scenes = graphene.List(FavoriteSceneType)
     favorite_movies = graphene.List(FavoriteMovieType)
@@ -58,13 +58,28 @@ class Query(graphene.ObjectType):
 
         return Performer.objects.all()
 
-    def resolve_scenes(self, info):
+    def resolve_scenes(self, info, search=None, id=None):
+        if search:
+            return Scene.objects.filter(title__icontains=search)
+        elif id:
+            return Scene.objects.filter(id=id)
+
         return Scene.objects.all()
 
-    def resolve_movies(self, info):
+    def resolve_movies(self, info, search=None, id=None):
+        if search:
+            return Movie.objects.filter(movieTitle__icontains=search)
+        elif id:
+            return Movie.objects.filter(id=id)
+
         return Movie.objects.all()
 
-    def resolve_studios(self, info):
+    def resolve_studios(self, info, search=None, id=None):
+        if search:
+            return Studios.objects.filter(studio__icontains=search)
+        elif id:
+            return Studios.objects.filter(id=id)
+
         return Studios.objects.all()
 
     def resolve_tags(self, info):

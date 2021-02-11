@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   left: {
     //flexDirection:'column',
     maxWidth: 420,
-    marginLeft: "6.5%",
+    marginLeft: "7%",
     marginTop: "5.5%",
     
   },

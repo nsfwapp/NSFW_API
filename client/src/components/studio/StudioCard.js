@@ -20,14 +20,14 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex'
   },
   root: {
-    maxWidth: 345,
+    maxWidth: 220,
     backgroundColor: '#000909',
     // color: theme.palette.secondary.main,
 
     
   },
   media: {
-    height: 540,
+    height: 110,
     
     
   },
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function PerformerCard({ performers }) {
+export default function StudioCard({ studios }) {
   let url = "";
 
 
@@ -57,27 +57,27 @@ export default function PerformerCard({ performers }) {
      
       <Grid container spacing={2} className={classes.container}>
       <CssBaseline />
-        {performers.map((performer) => (
+        {studios.map((studio) => (
           <Grid
             item
             xs={6}
-            md={4}
-            lg={3}
-            key={performer.id}
+            md={2}
+            lg={2}
+            key={studio.id}
             className={classes.gridf}
           >
-            {performer.profilePic !== null && (
+            {studio.url !== null && (
               
               <Card className={classes.root}>
-                <CardActionArea href={`/performer/${performer.id}`} >
+                <CardActionArea href={`/studio/${studio.id}`} >
                   <CardMedia
                     className={classes.media}
-                    image={performer.profilePic.slice(2, -2)}
-                    title={performer.name}
+                    image={studio.url.slice(2, -2)}
+                    title={studio.studio}
                   />
                   <CardContent>
-                    <Typography align="center" variant="h5">
-                      {performer.name}
+                    <Typography align="center" variant="h6"  color='secondary'>
+                      {studio.studio}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
@@ -85,17 +85,17 @@ export default function PerformerCard({ performers }) {
               
             )}
 
-            {performer.profilePic == null && (
+            {studio.url == null && (
               <Card className={classes.root}>
-                <CardActionArea href={`/performer/${performer.id}`} >
+                <CardActionArea href={`/studio/${studio.id}`} >
                   <CardMedia
                     className={classes.media}
-                    image="https://upload.wikimedia.org/wikipedia/en/thumb/e/ed/Carmen_Sandiego.png/220px-Carmen_Sandiego.png"
-                    title={performer.name}
+                    image="https://payload.cargocollective.com/1/5/173809/13009228/Logo_4.2_670.jpg"
+                    title={studio.url}
                   />
                   <CardContent>
-                    <Typography color="primary" align="center" variant="h5" >
-                      {performer.name}
+                    <Typography color="primary" align="center" variant="h6"  color='secondary'>
+                      {studio.studio}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
@@ -103,7 +103,7 @@ export default function PerformerCard({ performers }) {
             )}
           </Grid>
         ))}
-        <Pagination count={10} variant="outlined" shape="rounded" />
+      
       </Grid>
     </div>
   );
