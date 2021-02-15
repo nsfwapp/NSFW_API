@@ -1,6 +1,6 @@
 import graphene 
 from graphene_django import DjangoObjectType
-from .models import Performer, Movie, Scene, Studios, Tags, FavoriteScene, FavoriteMovie, FavoritePerformer
+from .models import Performer, Movie, Scene, Studios, Tags, FavoriteScene, FavoriteMovie, FavoritePerformer, Ratings, Directors
 from users.schema import UserType
 from graphql import GraphQLError
 
@@ -25,6 +25,14 @@ class TagsType(DjangoObjectType):
     class Meta:
             model = Tags
 
+class RatingType(DjangoObjectType):
+    class Meta:
+            model = Ratings
+
+class DirectorType(DjangoObjectType):
+    class Meta:
+            model = Directors
+
 class FavoriteSceneType(DjangoObjectType):
     class Meta:
             model = FavoriteScene
@@ -45,6 +53,8 @@ class Query(graphene.ObjectType):
     scenes = graphene.List(SceneType, id=graphene.Int(), search=graphene.String())
     movies = graphene.List(MovieType, id=graphene.Int(), search=graphene.String())
     studios = graphene.List(StudioType, id=graphene.Int(), search=graphene.String())
+    rating = graphene.List(RatingType)
+    director = graphene.List(DirectorType)
     tags = graphene.List(TagsType)
     favorite_scenes = graphene.List(FavoriteSceneType)
     favorite_movies = graphene.List(FavoriteMovieType)

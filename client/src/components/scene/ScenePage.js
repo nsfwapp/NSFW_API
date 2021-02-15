@@ -34,8 +34,12 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: 720,
     objectFit: 'cover'
-    
-
+  },
+  unkown:{
+    height: 720,
+    width: '100%',
+    alignContent: 'center',
+    objectFit: 'cover'
   },
   info:{
     margin:'1%',
@@ -88,10 +92,11 @@ export default function ScenePage({ match }) {
 
           return (
             <div className="container">
+              
               <Grid container alignContent='center'>
                 <Grid item className={classes.left} xs={12} md={12} lg={12}>
                   <Card className={classes.root} square>
-                    { scene.thumbnailUrl !== null && (<CardMedia
+                    { scene.previewUrl !== null && (<CardMedia
                       className={classes.media}
                       autoPlay
                       component='video'
@@ -102,7 +107,7 @@ export default function ScenePage({ match }) {
 
                     { scene.previewUrl == null && (
                      <CardMedia
-                        className={classes.media}
+                        className={classes.unkown}
                         image="https://cdn-pics.letmejerk.com/thumbs/874423/874423.jpg"
                         title="{scene.title}"
                       />
@@ -125,9 +130,13 @@ export default function ScenePage({ match }) {
                       {scene.length}
                       </Typography>
 
-                      <Typography color='inherit' >
-                          {scene.performers}
-                      </Typography>
+                      <Grid color='inherit' >
+                          {scene.performers.map((performer) => (
+                          <Grid item key={performer.name}>
+                          <Typography > {performer.name}</Typography>
+                          </Grid>
+                          ))}
+                      </Grid>
                
                     </Grid>
                 <Grid item sm />

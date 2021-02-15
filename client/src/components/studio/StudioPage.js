@@ -21,6 +21,8 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     height: 150,
+    backgroundSize: '175px',
+    backgroundColor: '#000'
   },
   container: {
     //marginLeft: "4%",
@@ -44,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     
   },
   info:{
-    margin:'2%'
+    margin:'0.7%'
   }
 }));
 
@@ -67,10 +69,11 @@ export default function StudioPage({ match }) {
             <div className="container">
               <Grid container >
                 <Grid item className={classes.left} xs={12} md={6} lg={6}>
+                  {console.log(studio.url)}
                   <Card className={classes.root}>
                     { studio.url !== null && (<CardMedia
                       className={classes.media}
-                      image={studio.url.slice(2, -2)}
+                      image={studio.url}
                       title="{studio.studio}"
                     />)}
 
@@ -115,11 +118,21 @@ export default function StudioPage({ match }) {
                         
                         align="center"
                         variant="h6"
+                        color="secondary"
+                        noWrap
+                        
+                      >
+                        Parent Studio: 
+                      </Typography>
+                    <Typography
+                        
+                        align="center"
+                        variant="h6"
                         color="inherit"
                         noWrap
                         
                       >
-                        Parent Studio: {studio.parentStudio}
+                        {studio.parentStudio}
                       </Typography>
                       
                     </Grid>

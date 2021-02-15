@@ -64,7 +64,7 @@ class Performer(models.Model):
     tattoos = models.CharField(max_length=50, blank=True, null=True)
     piercings = models.CharField(max_length=50, blank=True, null=True)
     measurments = models.CharField(max_length=50, blank=True, null=True)
-    rating = models.ForeignKey('Ratings', models.DO_NOTHING, blank=True, null=True)
+    rating = models.ForeignKey(Ratings, models.DO_NOTHING, blank=True, null=True, related_name='performer_rating')
 
     def __str__(self):
         return self.name
@@ -81,13 +81,13 @@ class Movie(models.Model):
     description = models.TextField(blank=True, null=True)
     gallary_urls = ArrayField(ArrayField(models.CharField(max_length=10, blank=True),size=8),size=8)  
     studio = models.ForeignKey(Studios, models.DO_NOTHING, blank=True, null=True)
-    director = models.ForeignKey(Directors, models.DO_NOTHING, blank=True, null=True)
-    release_date = models.ForeignKey(Releasedates, models.DO_NOTHING, blank=True, null=True)
-    rating = models.ForeignKey(Ratings, models.DO_NOTHING, blank=True, null=True)
+    director = models.ForeignKey(Directors, models.DO_NOTHING, blank=True, null=True, related_name='movie_director')
+    release_date = models.ForeignKey(Releasedates, models.DO_NOTHING, blank=True, null=True, related_name='movie_release_date')
+    rating = models.ForeignKey(Ratings, models.DO_NOTHING, blank=True, null=True, related_name='movie_rating')
 
-    performers = models.ManyToManyField(Performer)
-    tags = models.ManyToManyField(Tags)
-    genres = models.ManyToManyField(Genres)
+    performers = models.ManyToManyField(Performer,  through='MovieCastTable', through_fields=('movie', 'performer'), related_name='movie_performers')
+    tags = models.ManyToManyField(Tags,  through='MovieTagsTable', through_fields=('movie', 'tag'), related_name='movie_tags')
+    genres = models.ManyToManyField(Genres, through='MovieGenresTable', through_fields=('movie', 'genre'), related_name='genres')
 
     class Meta:
         db_table = 'movies'
@@ -105,8 +105,8 @@ class Scene(models.Model):
     rating = models.ForeignKey(Ratings, models.DO_NOTHING, blank=True, null=True)
     movie = models.ForeignKey(Movie, models.DO_NOTHING, blank=True, null=True)
 
-    performers = models.ManyToManyField(Performer)
-    tags = models.ManyToManyField(Tags)
+    performers = models.ManyToManyField(Performer, through='SceneCastTable', through_fields=('scene', 'performer'), related_name='scene_performers')
+    tags = models.ManyToManyField(Tags,  through='SceneTagsTable', through_fields=('scene', 'tag'), related_name='scene_tags')
 
     class Meta:
         db_table = 'scenes'
@@ -127,3 +127,46 @@ class FavoritePerformer(models.Model):
 
     performer = models.ForeignKey(Performer, related_name='favorite_performers', on_delete=models.CASCADE)
 
+# many to many situations
+
+class SceneCastTable(models.Model):
+    scene = models.ForeignKey('Scene', models.DO_NOTHING, blank=True, null=True)
+    performer = models.ForeignKey('Performer', models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        #managed = False
+        db_table = 'scene_cast_table'
+
+class MovieCastTable(models.Model):
+    movie = models.ForeignKey('Movie', models.DO_NOTHING, blank=True, null=True)
+    performer = models.ForeignKey('Performer', models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        #managed = False
+        db_table = 'movie_cast_table'
+
+
+class MovieGenresTable(models.Model):
+    movie = models.ForeignKey('Movie', models.DO_NOTHING, blank=True, null=True)
+    genre = models.ForeignKey('Genres', models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        #managed = False
+        db_table = 'movie_genres_table'
+
+
+class MovieTagsTable(models.Model):
+    movie = models.ForeignKey('Movie', models.DO_NOTHING, blank=True, null=True)
+    tag = models.ForeignKey('Tags', models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        #managed = False
+        db_table = 'movie_tags_table'
+
+class SceneTagsTable(models.Model):
+    scene = models.ForeignKey('Scene', models.DO_NOTHING, blank=True, null=True)
+    tag = models.ForeignKey('Tags', models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        #managed = False
+        db_table = 'scene_tags_table'

@@ -23,11 +23,15 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 220,
     backgroundColor: '#000909',
     // color: theme.palette.secondary.main,
+    //objectFit: 'cover'
+    
 
     
   },
   media: {
     height: 110,
+    backgroundSize: '125px',
+    
     
     
   },
@@ -72,14 +76,15 @@ export default function StudioCard({ studios }) {
                 <CardActionArea href={`/studio/${studio.id}`} >
                   <CardMedia
                     className={classes.media}
-                    image={studio.url.slice(2, -2)}
+                    image={studio.url}
                     title={studio.studio}
+                    style={{ objectFit:'fit'}}
                   />
-                  <CardContent>
+                  {/* <CardContent>
                     <Typography align="center" variant="h6"  color='secondary'>
                       {studio.studio}
                     </Typography>
-                  </CardContent>
+                  </CardContent> */}
                 </CardActionArea>
               </Card>
               
