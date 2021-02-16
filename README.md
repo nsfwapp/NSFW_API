@@ -13,7 +13,7 @@ GraphQL Api for NSFW_Scraper
      - [ ] filters
 - Client
   - [x] create good ui for login/register and tour home page ( functionality already implemented )
-  - [ ] create performer, scene, movie and studio cards
-  - [ ] fetch data with api
+  - [x] create performer, scene, movie and studio cards
+  - [x] fetch data with api
 
 # Join Discord: [NSFW_DEV](https://discord.gg/7GgzeRAZ7P)
