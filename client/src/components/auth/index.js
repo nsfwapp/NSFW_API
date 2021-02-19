@@ -4,6 +4,7 @@ import Register from './Register'
 import HomePage from './HomePage'
 import Login from './Login'
 import NavTour from '../layout/NavTour'
+import NavAnt from '../layout/NavAnt'
 
 import TourPage from './TourPage';
 
@@ -12,7 +13,7 @@ function Tour() {
   return (
     <Router>
       
-      <NavTour />
+      <NavAnt />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path='/tour' component={TourPage} />

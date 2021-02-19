@@ -53,14 +53,14 @@ const theme = createMuiTheme({
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
+    {/* <ThemeProvider theme={theme}> */}
     <CssBaseline />
     <ApolloProvider client={client}>
       <Query query={Is_logged_in_query}>
         {({data}) => data.isLoggedIn ? <App /> : <Tour />}
       </Query>
     </ApolloProvider>
-    </ThemeProvider>
+    {/* </ThemeProvider> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
